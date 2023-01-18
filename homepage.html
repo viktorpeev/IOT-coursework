@@ -6,7 +6,9 @@
         justify-content: center;
         align-items: center;
     }
-
+    body{
+        background-color: #00008b;
+    }
 
     button {
         width: 32px;
@@ -28,16 +30,35 @@
         text-align: center;
         font-size: 24px;
     }
+    .items{
+        display: flex;
+        justify-content: center;
+    }
+    #counter{
+        margin-top: 10%;
+    }
+    .cold ,.hot{
+        display: none;
+    }
 </style>
 
 <head>
     <title>Number Counter</title>
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
+    <div class="head" style="color: white; background-color: black; width: 100%; height: 50px; text-align: center; font-size: 26px; margin-bottom: 25px;">IOT Aquarium</div>
+<div class="items">
+    <img style="width: 500px; height: 100%;" src="C:/Users/Viktor/Desktop/IOT-coursework/public/aquarium.png" alt="">
+    <img class="normal" style="width: 500px; height: 100%;" src="C:/Users/Viktor/Desktop/IOT-coursework/public/nrml.png" alt="">
+    <img class="cold" style="width: 500px; height: 100%;" src="C:/Users/Viktor/Desktop/IOT-coursework/public/cold.png" alt="">
+    <img class="hot" style="width: 500px; height: 100%;" src="C:/Users/Viktor/Desktop/IOT-coursework/public/hot.png" alt="">
+</div>
+
     <div id="counter">
         <button id="decrement">-</button>
-        <span id="count">0</span>
+        <span style="color:white" id="count">25°</span>
         <button id="increment">+</button>
     </div>
     <div id="message" style="display: flex; justify-content: center;"></div>
@@ -46,27 +67,35 @@
         const decrementButton = document.getElementById('decrement');
         const incrementButton = document.getElementById('increment');
         const countElement = document.getElementById('count');
-        const messageElement = document.getElementById('message');
 
-        let count = 0;
+        let count = 25;
 
         decrementButton.addEventListener('click', () => {
             count--;
-            countElement.textContent = count;
-            if (count < 0) {
-                messageElement.textContent = 'temperature is negative';
-            } else if(count ==  0) {
-                messageElement.textContent = '';
+            countElement.textContent = count + '°';
+            if (count < 23) {
+                document.querySelector('.hot').style.display='none';
+                document.querySelector('.normal').style.display='none';
+                document.querySelector('.cold').style.display='block';
+            } else if(count>23 && count<27){
+                document.querySelector('.normal').style.display='block';
+                document.querySelector('.hot').style.display='none';
+                document.querySelector('.cold').style.display='none';
             }
         });
 
         incrementButton.addEventListener('click', () => {
             count++;
-            countElement.textContent = count;
-            if (count > 0) {
-                messageElement.textContent = 'temperature is positive';
-            } else if(count ==  0) {
-                messageElement.textContent = '';
+            countElement.textContent = count + '°';
+            if (count > 27) {
+                document.querySelector('.hot').style.display='block';
+                document.querySelector('.normal').style.display='none';
+                document.querySelector('.cold').style.display='none';
+            }
+            else if(count>23 && count<27) {
+                document.querySelector('.normal').style.display='block';
+                document.querySelector('.hot').style.display='none';
+                document.querySelector('.cold').style.display='none';
             }
         });
     </script>
